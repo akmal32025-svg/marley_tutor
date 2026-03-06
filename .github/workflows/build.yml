@@ -1,0 +1,30 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Extract ZIP
+        run: unzip marley_tutor_flutter.zip
+        
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          
+      - name: Get dependencies
+        run: |
+          cd marley_tutor
+          flutter pub get
+          
+      - name: Build APK
+        run: |
+          cd marley_tutor
+          flutter build apk --release
+          
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: marley-apk
+          path: marley_tutor/build/app/outputs/flutter-apk/app-release.apk
