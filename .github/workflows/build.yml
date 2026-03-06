@@ -24,7 +24,7 @@ jobs:
           flutter build apk --release
           
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: marley-apk
           path: marley_tutor/build/app/outputs/flutter-apk/app-release.apk
